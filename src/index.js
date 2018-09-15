@@ -58,7 +58,26 @@ const returnBackInSecond = async(b) => {
 const getDeepPropertiesCount = (obj) => {return (JSON.stringify(obj)).match(/\:/g).length};
 const createSerializedObject = () => {return null;};
 const toBuffer = () => {};
-const sortByProto = () => {};
+const sortByProto = (arr) => {
+	let arr_length = arr.length;
+	let counter;
+	function sortArr(){	
+		counter = 0;
+		for(let i=0;i<arr_length-1;i++){			
+			if(!arr[i+1].isPrototypeOf(arr[i])){
+				counter = 1;
+				let temp = arr[i];
+				arr[i] = arr[i+1];
+				arr[i+1] = temp;
+				i = arr_length;
+			}
+		}
+		if(!counter){return;}
+		else{sortArr();}
+		return;
+	}
+	return arr;
+};
 
 exports.createEnumerableProperty = createEnumerableProperty;
 exports.createNotEnumerableProperty = createNotEnumerableProperty;
