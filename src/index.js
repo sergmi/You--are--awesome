@@ -15,7 +15,23 @@ const incrementor = () => {
 	return func;
 };
 
-const asyncIncrementor = () => {};
+
+let figure = 0;
+const count = async() => {
+	return new Promise((resolve)=>{
+		setTimeout(()=>{
+			resolve();
+			figure += 1;
+		},100);
+	})
+}
+
+const asyncIncrementor = async() => {
+	await count();
+	return figure;
+};
+
+
 const createIncrementer = () => {
 	let digits = [1,2,3,4,5,6,7,8,9];
 	digits.next = function(){
